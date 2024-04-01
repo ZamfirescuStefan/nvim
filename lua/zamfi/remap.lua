@@ -20,11 +20,19 @@ vim.keymap.set('n', 'Q', '<nop>')
 
 local opts  = {noremap = true, silent = true}
 
+vim.keymap.set('x', '<leader>p', '\"_dP')
+vim.keymap.set('n', '<leader>d', '\"_d')
+vim.keymap.set('n', '<leader>v', '\"_d')
+
+vim.keymap.set('i', '<C-c>', '<Esc>')
+
+vim.keymap.set('n', 'Q', '<nop>')
+
 -- Resize windows
 vim.api.nvim_set_keymap('n', '<C-Up>', ':resize +4<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-Down>', ':resize -4<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-h>', ':vertical resize +4<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-j>', ':vertical resize -4<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-l>', ':vertical resize -4<CR>', opts)
 
 -- Copy file paths
 vim.keymap.set('n', '<leader>cf', '<cmd>let @+ = expand(\"%\")<CR>', { desc = 'Copy File Name' })
@@ -33,10 +41,11 @@ vim.keymap.set('n', '<leader>cp', '<cmd>let @+ = expand(\"%:p\")<CR>', { desc = 
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
 
- vim.api.nvim_create_autocmd('TextYankPost', {
-     desc = 'Highlight when yanking (copying) text',
-     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-     callback = function()
-         vim.highlight.on_yank()
-     end,
- })
+-- Highlight when yanking
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
