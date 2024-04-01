@@ -48,7 +48,7 @@ end
 
 function telescope_file_browser()
     require('telescope').extensions.file_browser.file_browser({
-        respecet_gitignore = false,
+        respect_gitignore = false,
         hidden = true,
         initial_mode = 'normal',
         dir_icon = ''
