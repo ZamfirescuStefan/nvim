@@ -1,3 +1,3 @@
+require('zamfi.lazy')
 require('zamfi.remap')
--- require('zamfi.packer')
 require('zamfi.set')
