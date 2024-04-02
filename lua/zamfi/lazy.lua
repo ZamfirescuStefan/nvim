@@ -21,8 +21,7 @@ local plugins = {
         dependencies = { { 'nvim-lua/plenary.nvim' },
         { 'nvim-telescope/telescope-live-grep-args.nvim' }}
     },
-    -- {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}
-    {'nvim-treesitter/nvim-treesitter'},
+    {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
     'nvim-lua/plenary.nvim',
     {
         'ThePrimeagen/harpoon',
