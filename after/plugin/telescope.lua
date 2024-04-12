@@ -43,7 +43,7 @@ telescope.setup {
 local builtin = require('telescope.builtin')
 
 function find_files_all()
-    builtin.find_files({ find_command = {'rg', '--files', '--no-ignore'} })
+    builtin.find_files({ find_command = {'rg', '--files', '--no-ignore', '--hidden'} })
 end
 
 function telescope_file_browser()
@@ -65,7 +65,7 @@ vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>fa', ':lua find_files_all()<CR>', {})
 
 vim.keymap.set('n', '<leader>fl', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', {})
-vim.keymap.set('n', '<leader>fa', ':lua telescope_file_browser()<CR>', {})
+vim.keymap.set('n', '<leader>fp', ':lua telescope_file_browser()<CR>', {})
 
 telescope.load_extension 'fzf'
 telescope.load_extension 'live_grep_args'
