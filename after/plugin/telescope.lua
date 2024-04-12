@@ -51,7 +51,8 @@ function telescope_file_browser()
         respect_gitignore = false,
         hidden = true,
         initial_mode = 'normal',
-        dir_icon = ''
+        dir_icon = '',
+        path = '%:p:h'
     })
 end
 
