@@ -8,6 +8,9 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+vim.opt.swapfile = false
+vim.opt.backup = false
+
 vim.opt.wrap = false
 
 vim.opt.clipboard = 'unnamedplus'
