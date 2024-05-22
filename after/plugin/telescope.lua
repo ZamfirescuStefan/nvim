@@ -4,8 +4,8 @@ telescope.setup {
     defaults = {
         mappings = {
             i = {
-                ['<C-j>'] = require('telescope.actions').cycle_history_next,
-                ['<C-k>'] = require('telescope.actions').cycle_history_prev,
+                ['<C-k>'] = require('telescope.actions').cycle_history_next,
+                ['<C-j>'] = require('telescope.actions').cycle_history_prev,
             }
         },
         file_browser = {
