@@ -28,6 +28,9 @@ local mason_lsp = require('mason-lspconfig').setup({
     },
 })
 
+require("mason-nvim-dap").setup({
+    ensure_installed = { "codelldb" }
+})
 
 local cmp = require('cmp')
 local cmp_select = {behovior = cmp.SelectBehavior.Select}

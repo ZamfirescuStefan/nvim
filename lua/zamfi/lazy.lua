@@ -54,6 +54,10 @@ local plugins = {
     {
         "nvim-telescope/telescope-file-browser.nvim",
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    },
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = { 'nvim-neotest/nvim-nio', 'rcarriga/nvim-dap-ui' , 'theHamsta/nvim-dap-virtual-text', 'jay-babu/mason-nvim-dap.nvim'}
     }
 }
 
