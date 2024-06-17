@@ -15,6 +15,7 @@ vim.keymap.set('i', 'kk', '<Esc>')
 vim.keymap.set('x', '<leader>p', '\"_dP')
 vim.keymap.set('n', '<leader>d', '\"_d')
 vim.keymap.set('v', '<leader>d', '\"_d')
+vim.keymap.set('v', '<leader>p', '\"_dP')
 vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', 'Q', '<nop>')
 
