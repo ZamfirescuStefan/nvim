@@ -8,45 +8,59 @@ return {
     },
     config = function()
 
-        local harpoon = require('harpoon')
+        local dap = require('dap')
+        local dapui = require('dapui')
 
-        harpoon:setup({
-            settings = { save_on_toggle = true }
-        })
+        dapui.setup()
+        require("nvim-dap-virtual-text").setup()
 
-        harpoon:extend({
-            UI_CREATE = function(cx)
-                vim.keymap.set('n', '<C-v>', function()
-                    harpoon.ui:select_menu_item({ vsplit = true })
-                end, { buffer = cx.bufnr })
+        dap.adapters.codelldb = {
+            type = 'server',
+            port = "${port}",
+            executable = {
+                command = 'codelldb',
+                args = {"--port", "${port}"},
 
-                vim.keymap.set('n', '<C-x>', function()
-                    harpoon.ui:select_menu_item({ split = true })
-                end, { buffer = cx.bufnr })
+                -- On windows you may have to uncomment this:
+                -- detached = false,
+            }
+        }
 
-                vim.keymap.set('n', '<C-t>', function()
-                    harpoon.ui:select_menu_item({ tabedit = true })
-                end, { buffer = cx.bufnr })
+        dap.configurations.cpp = {
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false,
+                args = {},
+            },
+        }
 
-            end,
-        })
+        dap.listeners.before.attach.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+        end
 
-        vim.keymap.set('n', '<leader>a', function() harpoon:list():append() end)
-        vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint)
+        vim.keymap.set('n', '<Leader>dc', dap.continue)
 
-
-        vim.keymap.set('n', '<leader>1', function() harpoon:list():select(1) end)
-        vim.keymap.set('n', '<leader>2', function() harpoon:list():select(2) end)
-        vim.keymap.set('n', '<leader>3', function() harpoon:list():select(3) end)
-        vim.keymap.set('n', '<leader>4', function() harpoon:list():select(4) end)
-        vim.keymap.set('n', '<leader>5', function() harpoon:list():select(5) end)
-        vim.keymap.set('n', '<leader>6', function() harpoon:list():select(6) end)
-        vim.keymap.set('n', '<leader>7', function() harpoon:list():select(7) end)
-        vim.keymap.set('n', '<leader>8', function() harpoon:list():select(8) end)
-        vim.keymap.set('n', '<leader>9', function() harpoon:list():select(9) end)
-
-
-        vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end)
-        vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end)
-    end
+        vim.keymap.set('n', '<F1>', dap.continue)
+        vim.keymap.set('n', '<F2>', dap.step_into)
+        vim.keymap.set('n', '<F3>', dap.step_over)
+        vim.keymap.set('n', '<F4>', dap.step_out)
+        vim.keymap.set('n', '<F5>', dap.step_back)
+        vim.keymap.set('n', '<F9>', dap.restart)
+    end 
 }
