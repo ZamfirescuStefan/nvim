@@ -14,7 +14,15 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 
 local plugins = {
-    'marko-cerovac/material.nvim',
+    "catppuccin/nvim",
+    {
+        'marko-cerovac/material.nvim',
+        priority = 1000,
+        lazy = false,
+        config = function ()
+            require('after.plugin.colors')
+        end
+    },
 
     {
         'nvim-telescope/telescope.nvim', version = '0.1.5',
@@ -61,4 +69,4 @@ local plugins = {
     }
 }
 
-require("lazy").setup(plugins, {})
+require("lazy").setup("plugins")
