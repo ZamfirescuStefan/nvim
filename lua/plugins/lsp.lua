@@ -41,6 +41,16 @@ return {
                     local lua_opts = lsp_zero.nnim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
+                lsp_zero.default_setup,
+                lua_ls = function()
+                    local lua_opts = lsp_zero.nvim_lua_ls()
+                    require('lspconfig').lua_ls.setup(lua_opts)
+                end,
+                clangd = function()
+                    require('lspconfig').clangd.setup({
+                        cmd = { "clangd", "--background-index", "--std=c++20" }, -- Added flag for C++20
+                    })
+                end,
             },
         })
 
