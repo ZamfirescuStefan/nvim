@@ -55,6 +55,9 @@ return {
 
         vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint)
         vim.keymap.set('n', '<Leader>dc', dap.continue)
+        vim.keymap.set('n', '<Leader>ds', dap.terminate)
+
+        vim.keymap.set('n', '<Leader>do', dapui.toggle)
 
         vim.keymap.set('n', '<F1>', dap.continue)
         vim.keymap.set('n', '<F2>', dap.step_into)
