@@ -45,7 +45,7 @@ return {
         })
 
         require("mason-nvim-dap").setup({
-            ensure_installed = { "codelldb" }
+            ensure_installed = { "codelldb", "cpptools" }
         })
 
         local cmp = require('cmp')
