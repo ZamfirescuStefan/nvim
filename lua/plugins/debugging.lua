@@ -50,7 +50,7 @@ return {
             dap.adapters.cppdbg = {
                 id = 'cppdbg',
                 type = 'executable',
-                command = '/home/szamfirescu/.vscode/extensions/ms-vscode.cpptools-1.21.6/debugAdapters/bin/OpenDebugAD7',  -- Path to cpptools on Linux
+                command = 'OpenDebugAD7',  -- Path to cpptools on Linux
             }
 
             -- Configuration for C++ debugging with GDB on Linux
