@@ -42,6 +42,7 @@ return {
 
 
         local builtin = require('telescope.builtin')
+        local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
         function find_files_all()
             builtin.find_files({ find_command = {'rg', '--files', '--no-ignore', '--hidden'} })
@@ -61,8 +62,15 @@ return {
         vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
         vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
-        vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
-        vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
+
+        vim.keymap.set('n', '<leader>fr', function()
+            require('telescope.builtin').resume({
+                initial_mode = 'normal',
+            })
+        end, {})
+
+        vim.keymap.set('n', '<leader>fw', live_grep_args_shortcuts.grep_word_under_cursor, {})
+        vim.keymap.set('v', '<leader>fv', live_grep_args_shortcuts.grep_visual_selection, {})
         vim.keymap.set('n', '<leader>fa', ':lua find_files_all()<CR>', {})
 
         vim.keymap.set('n', '<leader>fl', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', {})
