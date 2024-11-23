@@ -17,6 +17,10 @@ return {
                     i = {
                         ['<C-k>'] = require('telescope.actions').cycle_history_next,
                         ['<C-j>'] = require('telescope.actions').cycle_history_prev,
+                    },
+                    n = {
+                        ['<C-k>'] = require('telescope.actions').cycle_history_next,
+                        ['<C-j>'] = require('telescope.actions').cycle_history_prev,
                     }
                 },
                 file_browser = {
