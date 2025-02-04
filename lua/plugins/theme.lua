@@ -7,6 +7,6 @@ return {
         color = color or 'material'
         vim.cmd.colorscheme(color)
 
-        vim.api.nvim_set_hl(0, "Cursor", { bg = "#6600ff" })
+        vim.api.nvim_set_hl(0, "Cursor", { bg = "#d9d9d9" })
     end
 }
