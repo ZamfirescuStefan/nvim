@@ -6,5 +6,7 @@ return {
         vim.g.material_style = 'deep ocean'
         color = color or 'material'
         vim.cmd.colorscheme(color)
-    end 
+
+        vim.api.nvim_set_hl(0, "Cursor", { bg = "#6600ff" })
+    end
 }
