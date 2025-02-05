@@ -3,24 +3,27 @@ return {
     version = '0.1.5',
     dependencies = {
         {'nvim-lua/plenary.nvim'},
-        {'nvim-telescope/telescope-live-grep-args.nvim'}, 
+        {'nvim-telescope/telescope-live-grep-args.nvim'},
         {'nvim-telescope/telescope-file-browser.nvim'},
         {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
     },
     config = function()
 
         local telescope = require('telescope')
+        local actions = require('telescope.actions')
 
         telescope.setup {
             defaults = {
                 mappings = {
                     i = {
-                        ['<C-k>'] = require('telescope.actions').cycle_history_next,
-                        ['<C-j>'] = require('telescope.actions').cycle_history_prev,
+                        ['<C-k>'] = actions.cycle_history_next,
+                        ['<C-j>'] = actions.cycle_history_prev,
+                        ["<C-d>"] = actions.move_selection_next,
+                        ["<C-u>"] = actions.move_selection_previous,
                     },
                     n = {
-                        ['<C-k>'] = require('telescope.actions').cycle_history_next,
-                        ['<C-j>'] = require('telescope.actions').cycle_history_prev,
+                        ['<C-k>'] = actions.cycle_history_next,
+                        ['<C-j>'] = actions.cycle_history_prev,
                     }
                 },
                 file_browser = {
