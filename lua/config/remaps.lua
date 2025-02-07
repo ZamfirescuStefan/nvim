@@ -35,9 +35,6 @@ vim.api.nvim_set_keymap('n', '<C-Down>', ':resize -4<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-h>', ':vertical resize +4<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-l>', ':vertical resize -4<CR>', opts)
 
--- Go up one directory in netrw with Ctrl + h
-vim.api.nvim_set_keymap('n', '<C-h>', ':Lexplore ..<CR>', { noremap = true, silent = true })
-
 -- Copy file paths
 vim.keymap.set('n', '<leader>cf', '<cmd>let @+ = expand(\"%\")<CR>', { desc = 'Copy File Name' })
 vim.keymap.set('n', '<leader>cp', '<cmd>let @+ = expand(\"%:p\")<CR>', { desc = 'Copy File Path' })

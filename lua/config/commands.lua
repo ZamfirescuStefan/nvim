@@ -22,7 +22,7 @@ local function run_cmake_command(command)
 end
 
 vim.api.nvim_create_user_command("CMake", function()
-    run_cmake_command("cmake ..")
+    run_cmake_command("cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1")
 end, {})
 
 vim.api.nvim_create_user_command("Build", function()
