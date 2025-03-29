@@ -1,11 +1,10 @@
 return {
     'AckslD/nvim-neoclip.lua',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
-        local neoclip = require('neoclip')
-        neoclip.setup()
+        require('neoclip').setup()
 
         vim.keymap.set('n', '<C-y>', ":lua require('telescope').extensions.neoclip.default()<CR>")
         vim.keymap.set('i', '<C-y>', ":lua require('telescope').extensions.neoclip.default()<CR>")
-
     end
 }

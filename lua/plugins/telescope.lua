@@ -10,7 +10,10 @@ return {
     config = function()
 
         local telescope = require('telescope')
+        local builtin = require('telescope.builtin')
         local actions = require('telescope.actions')
+        local lga_actions = require("telescope-live-grep-args.actions")
+        local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
         telescope.setup {
             defaults = {
@@ -44,18 +47,28 @@ return {
                     override_file_sorter = true,
                     case_mode = 'smart_case',
                 },
+                live_grep_args = {
+                      auto_quoting = true,
+                      mappings = {
+                        i = {
+                          ["<C-a>"] = lga_actions.quote_prompt({ postfix = " --hidden --no-ignore " }),
+                          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                          ["<C-space>"] = lga_actions.to_fuzzy_refine,
+                        },
+                      },
+                }
             },
         }
 
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
 
-        local builtin = require('telescope.builtin')
-        local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+        vim.keymap.set('n', '<leader>fw', live_grep_args_shortcuts.grep_word_under_cursor, {})
+        vim.keymap.set('v', '<leader>fv', live_grep_args_shortcuts.grep_visual_selection, {})
 
-        function find_files_all()
-            builtin.find_files({ find_command = {'rg', '--files', '--no-ignore', '--hidden'} })
-        end
-
-        function telescope_file_browser()
+        vim.keymap.set('n', '<leader>fl', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', {})
+        vim.keymap.set('n', '<leader>fp', function()
             require('telescope').extensions.file_browser.file_browser({
                 respect_gitignore = false,
                 hidden = true,
@@ -63,25 +76,20 @@ return {
                 dir_icon = '',
                 path = '%:p:h'
             })
-        end
+        end, {})
 
-
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-        vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
-
-        vim.keymap.set('n', '<leader>fr', function()
-            require('telescope.builtin').resume({
-                initial_mode = 'normal',
+        vim.keymap.set('n', '<leader>fa', function()
+            builtin.find_files({
+                no_ignore = true,
+                hidden = true
             })
         end, {})
 
-        vim.keymap.set('n', '<leader>fw', live_grep_args_shortcuts.grep_word_under_cursor, {})
-        vim.keymap.set('v', '<leader>fv', live_grep_args_shortcuts.grep_visual_selection, {})
-        vim.keymap.set('n', '<leader>fa', ':lua find_files_all()<CR>', {})
-
-        vim.keymap.set('n', '<leader>fl', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', {})
-        vim.keymap.set('n', '<leader>fp', ':lua telescope_file_browser()<CR>', {})
+        vim.keymap.set('n', '<leader>fr', function()
+            builtin.resume({
+                initial_mode = 'normal',
+            })
+        end, {})
 
         telescope.load_extension 'fzf'
         telescope.load_extension 'live_grep_args'
