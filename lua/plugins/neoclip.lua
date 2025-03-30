@@ -5,6 +5,10 @@ return {
         require('neoclip').setup()
 
         vim.keymap.set('n', '<C-y>', ":lua require('telescope').extensions.neoclip.default()<CR>")
-        vim.keymap.set('i', '<C-y>', ":lua require('telescope').extensions.neoclip.default()<CR>")
-    end
+        vim.keymap.set('i', '<C-y>', function()
+                    vim.schedule(function()
+                        require('telescope').extensions.neoclip.default()
+                    end)
+                end, { expr = false })
+            end
 }
